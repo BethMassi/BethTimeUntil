@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BethTimeUntil"
+             x:Class="BethTimeUntil.MainPage"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             BackgroundColor="{DynamicResource PrimaryTextColor}">
+
+    <Grid>
+      
+        <BlazorWebView x:Name="blazorWebView" HostPage="wwwroot/index.html" Grid.Row="0" Margin="22">
+            <BlazorWebView.RootComponents>
+                <RootComponent Selector="#app" ComponentType="{x:Type local:Main}" />
+            </BlazorWebView.RootComponents>
+        </BlazorWebView>
+                
+        <skia:SKLottieView Grid.Row="1"
+                x:Name="skiaView"
+                Source="lottie_hourglass.json"
+                HeightRequest="300"
+                WidthRequest="300"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"           
+                Background="Transparent"/>
+    </Grid>   
+
+
+</ContentPage>

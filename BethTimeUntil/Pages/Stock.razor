@@ -1,0 +1,31 @@
+﻿@page "/stock"
+
+<div class="alert alert-secondary mt-4">
+    <span class="oi oi-pencil me-2" aria-hidden="true"></span>
+    <strong>@Title</strong>
+
+    <p>
+        Current MSFT stock price: @StockPrice
+    </p>
+
+</div>
+
+@code {
+    // Demonstrates how a parent component can supply parameters
+    [Parameter]
+    public string Title { get; set; }
+
+    public double StockPrice
+    {
+        get { return GetStockPrice(); }
+        set { }
+    }
+
+    private double GetStockPrice()
+    {
+
+        return 100.00;
+    }
+
+}
+

@@ -1,0 +1,45 @@
+﻿@page "/"
+
+<div class="text-center">
+    <h1>Countdown to Beth's Retirement</h1>
+    <h4>@timeUntil</h4>
+</div>
+
+@code {
+    private static System.Timers.Timer aTimer;
+    private DateTime retirementDate = new DateTime(2027, 10, 20);
+    private string timeUntil;
+
+    protected override void OnInitialized()
+    {
+        StartTimer();
+    }
+
+    public void StartTimer()
+    {
+        aTimer = new System.Timers.Timer(1000);
+        aTimer.Elapsed += CountDownTimer;
+        aTimer.Enabled = true;    
+        
+    }
+
+    public void CountDownTimer(Object source, System.Timers.ElapsedEventArgs e)
+    {
+        TimeSpan remainingTime = retirementDate - DateTime.UtcNow;
+        if (remainingTime > TimeSpan.Zero)
+        {   
+            if (remainingTime.Days > 365) {
+                timeUntil = $"{remainingTime.Days / 365} Years, {remainingTime.Days % 365} Days, {remainingTime.Hours} Hours, {remainingTime.Minutes} Minutes, {remainingTime.Seconds} Seconds";
+            } else
+            {
+                timeUntil = $"{remainingTime.Days} Days, {remainingTime.Hours} Hours, {remainingTime.Minutes} Minutes, {remainingTime.Seconds} Seconds";
+            }
+        }
+        else
+        {
+            timeUntil = "Retired!";
+            aTimer.Enabled = false;
+        }
+        InvokeAsync(StateHasChanged);
+    }
+}
