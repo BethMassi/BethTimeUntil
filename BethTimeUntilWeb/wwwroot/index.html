@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>Time Until</title>
+    <title>Time Until - Web</title>
     <base href="/" />
     <link href="_content/Root/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="_content/Root/css/app.css" rel="stylesheet" />
-    <link href="BethTimeUntil.styles.css" rel="stylesheet" />
+    <link href="BethTimeUntilWeb.styles.css" rel="stylesheet" />
 </head>
 
 <body>
-
-    <div class="status-bar-safe-area"></div>
-
     <div id="app">
         <svg class="loading-progress">
             <circle r="40%" cx="50%" cy="50%" />
@@ -27,9 +25,8 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-
-    <script src="_framework/blazor.webview.js" autostart="false"></script>
-    <script src="_content/Root/js/lottie-player.js"></script>
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="_content/Root/js/lottie-player.js"></script>    
 </body>
 
 </html>

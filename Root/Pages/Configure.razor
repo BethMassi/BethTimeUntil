@@ -1,0 +1,49 @@
+﻿@page "/configure"
+@using Root.Models
+@using Root.Services
+@inject ILocalStorage LocalStorage
+@inject NavigationManager NavigationManager
+
+<div>
+    <h2>Set up your countdown!</h2>
+
+    <EditForm class="form-control" Model="@myModel" OnValidSubmit="@HandleSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <table cellpadding="5">
+            <tr>
+                <td width="40%">Name:</td>
+                <td width="60%"><InputText id="name" @bind-Value="myModel.Name" /></td>
+            </tr>
+            <tr>
+                <td width="40%">Countdown to date:</td>
+                <td width="60%"><InputDate id="date" @bind-Value="myModel.CountdownDate" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button class="btn-primary" type="submit">Save</button></td>
+            </tr>
+        </table>
+
+    </EditForm>
+
+
+</div>
+
+@code {
+    private TimeUntilModel myModel;
+
+    protected override void OnInitialized()
+    {
+        myModel = TimeUntilService.GetModel(LocalStorage);
+    }
+
+    private void HandleSubmit()
+    {
+        TimeUntilService.SaveModel(myModel, LocalStorage);
+
+        NavigationManager.NavigateTo("/");
+    }
+
+
+}

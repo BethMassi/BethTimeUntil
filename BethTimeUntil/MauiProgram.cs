@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using SkiaSharp.Views.Maui.Controls.Hosting;
+using Root.Interfaces;
+using BethTimeUntil.Services;
 
 namespace BethTimeUntil;
 
@@ -10,7 +11,6 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-            .UseSkiaSharp()
             .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -22,7 +22,10 @@ public static class MauiProgram
 		builder.Services.AddBlazorWebViewDeveloperTools();
 		builder.Logging.AddDebug();
 #endif
+		// Add device specific services used by RCL (Root)
+		builder.Services.AddSingleton<IFormFactor, FormFactor>();
+        builder.Services.AddSingleton<ILocalStorage, LocalStorage>();
 
-		return builder.Build();
+        return builder.Build();
 	}
 }
