@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics;
+using System.Text.Json;
 
 namespace Root.Services
 {
@@ -23,21 +24,35 @@ namespace Root.Services
 
         private void Read()
         {
-            string jsonString = ReadFromStorage();
-            if (jsonString != null)
+            try
             {
-                Items = JsonSerializer.Deserialize<List<LocalStorageItem>>(jsonString);
+                string jsonString = ReadFromStorage();
+                if (jsonString != null && jsonString != "")
+                {
+                    Items = JsonSerializer.Deserialize<List<LocalStorageItem>>(jsonString);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Could not read Items" + ex.Message);
             }
         }
         private void Save() {
-            string jsonString = JsonSerializer.Serialize(Items);
-            SaveToStorage(jsonString);
-        }
+            try
+            {
+                string jsonString = JsonSerializer.Serialize(Items);
+                SaveToStorage(jsonString);
 
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Could not save Items" + ex.Message);
+            }
+        }
         public string GetItem(string key)
         {
-            if (this.Items == null) { Read(); }
-            if (this.Items != null)
+            if (Items == null) { Read(); }
+            if (Items != null)
             {
                 var item = Items.FirstOrDefault(i => i.Key == key);
                 if (item != null)
@@ -49,19 +64,19 @@ namespace Root.Services
         }
         public void SetItem(string key, string value)
         {
-            if (this.Items != null)
+            if (Items == null) { Items = new List<LocalStorageItem>(); }
+            
+            var item = Items.FirstOrDefault(i => i.Key == key);
+            if (item != null)
             {
-                var item = Items.FirstOrDefault(i => i.Key == key);
-                if (item != null)
-                {
-                    item.Value = value;
-                }
-                else
-                {
-                    Items.Add(new LocalStorageItem { Key = key, Value = value });
-                }
-                Save();
+                item.Value = value;
             }
+            else
+            {
+                Items.Add(new LocalStorageItem { Key = key, Value = value });
+            }
+            Save();
+            
         }
         public void RemoveItem(string key)
         {
