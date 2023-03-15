@@ -14,6 +14,15 @@ namespace Root.Models
         public string Name { get; set; } = "Countdown to...";
         [Required]        
         public DateTime CountdownDate { get; set; } = DateTime.Today.AddDays(7);
-        public string AnimationImage { get; set; }
+        public string AnimationImage { get; set; } = "lottie_hourglass";        
+    }
+
+    internal class TimeUntilImages
+    {
+        public List<string> AnimationImages { get; set; } = new List<string>() {
+            "lottie_hourglass",
+            "lottie_dude",
+            "lottie_cloud"
+        };
     }
 }

@@ -41,8 +41,10 @@ namespace Root.Services
             try
             {
                 string jsonString = JsonSerializer.Serialize(Items);
-                SaveToStorage(jsonString);
-
+                if (jsonString != null && jsonString != "")
+                {
+                    SaveToStorage(jsonString);
+                }
             }
             catch (Exception ex)
             {

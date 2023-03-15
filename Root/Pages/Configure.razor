@@ -11,37 +11,55 @@
         <DataAnnotationsValidator />
         <ValidationSummary />
 
-        <table cellpadding="5">
+        <table cellpadding="5" >
             <tr>
-                <td width="40%">Name:</td>
-                <td width="60%"><InputText id="name" @bind-Value="myModel.Name" /></td>
+                <td colspan="2">Countdown to...</td>
             </tr>
             <tr>
-                <td width="40%">Countdown to date:</td>
-                <td width="60%"><InputDate id="date" @bind-Value="myModel.CountdownDate" /></td>
+                <td width="20%" >What:</td>
+                <td width="60%"><InputText id="name" @bind-Value="myModel.Name" class="form-control"/></td>
             </tr>
             <tr>
-                <td colspan="2"><button class="btn-primary" type="submit">Save</button></td>
+                <td width="20%">When:</td>
+                <td width="60%"><InputDate id="date" @bind-Value="myModel.CountdownDate" class="form-control" /></td>
+            </tr>
+            <tr>
+                <td colspan="2" >                   
+                    <InputRadioGroup @bind-Value="myModel.AnimationImage">
+                    Choose animation:
+                     <br />       
+                    @foreach (var image in images.AnimationImages)
+                    {                                                      
+                            <InputRadio Value="@image" class="form-check-input" />
+                            var src = $"_content/Root/animations/{image}.json";
+                            <lottie-player src=@src background="transparent" speed="1"
+                                style="width: 100px; height: 100px;" loop autoplay />                              
+                    }
+                    </InputRadioGroup>                   
+                </td>
+            </tr>           
+            <tr>
+                <br />
+                <td colspan="2" ><button class="btn-primary" type="submit">Save</button></td>
             </tr>
         </table>
 
     </EditForm>
-
-
 </div>
 
 @code {
     private TimeUntilModel myModel;
+    private TimeUntilImages images;
 
     protected override void OnInitialized()
     {
         myModel = TimeUntilService.GetModel(LocalStorage);
+        images = TimeUntilService.GetImages();
     }
 
     private void HandleSubmit()
     {
         TimeUntilService.SaveModel(myModel, LocalStorage);
-
         NavigationManager.NavigateTo("/");
     }
 

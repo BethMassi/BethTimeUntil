@@ -12,6 +12,7 @@ namespace Root.Services
     internal class TimeUntilService
     {
         private static TimeUntilModel myModel;
+        private static TimeUntilImages images = new TimeUntilImages();
         private const string ModelName = "TimeUntilModel";
 
         public static TimeUntilModel GetModel(ILocalStorage storage)
@@ -22,23 +23,21 @@ namespace Root.Services
                 if (jsonString != null)
                 {
                     myModel = JsonSerializer.Deserialize<TimeUntilModel>(jsonString);
-
                 }
             }
-            if (myModel == null)
-            {
-                myModel = new TimeUntilModel();
-                myModel.Name = "Beth's Retirement";
-                myModel.CountdownDate = new DateTime(2027, 10, 20);
-            }
+            myModel ??= new TimeUntilModel();
             return myModel;
         }
-
         public static void SaveModel(TimeUntilModel myModel, ILocalStorage storage)
         {
             string jsonString = JsonSerializer.Serialize(myModel);
             storage.SetItem(ModelName, jsonString);
         }
-
+        
+        public static TimeUntilImages GetImages()
+        {
+            return images;
+        }
+        
     }
 }
