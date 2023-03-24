@@ -37,7 +37,8 @@ namespace Root.Services
                 Debug.WriteLine("Could not read Items" + ex.Message);
             }
         }
-        private void Save() {
+        private void Save() 
+        {
             try
             {
                 string jsonString = JsonSerializer.Serialize(Items);
@@ -77,8 +78,7 @@ namespace Root.Services
             {
                 Items.Add(new LocalStorageItem { Key = key, Value = value });
             }
-            Save();
-            
+            Save();            
         }
         public void RemoveItem(string key)
         {
@@ -88,8 +88,8 @@ namespace Root.Services
                 if (item != null)
                 {
                     Items.Remove(item);
-                }
-                Save();    
+                    Save();
+                }                
             }
         }
     }
