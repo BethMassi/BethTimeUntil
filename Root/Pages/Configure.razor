@@ -45,18 +45,33 @@
 @code {
     private TimeUntilModel myModel;
     private TimeUntilImages images;
+    private bool isSubmitted = false;
+    private bool isNavigating = false;
 
     protected override void OnInitialized()
     {
         myModel = TimeUntilService.GetModel(LocalStorage);
         images = TimeUntilService.GetImages();
+
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        isNavigating = true;
+        HandleSubmit();        
     }
 
     private void HandleSubmit()
     {
-        TimeUntilService.SaveModel(myModel, LocalStorage);
-        NavigationManager.NavigateTo("/");
+        if (!isSubmitted)
+        {
+            TimeUntilService.SaveModel(myModel, LocalStorage);             
+            isSubmitted = true;
+        }
+        if (!isNavigating)
+        {
+            NavigationManager.NavigateTo("/");
+        }
     }
-
-
 }
