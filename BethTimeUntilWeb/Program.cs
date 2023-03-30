@@ -11,13 +11,11 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
+//Use Blazored OSS library for browser-local storage
 builder.Services.AddBlazoredLocalStorageAsSingleton();
 
 // Add device specific services used by RCL (Root)
 builder.Services.AddSingleton<IFormFactor, FormFactor>();
 builder.Services.AddSingleton<ILocalStorage, LocalStorage>();
-
-//Needed for JS Interop to Web local storage
-//builder.Services.AddScoped<Root.Services.LocalStorageAccessor>();
 
 await builder.Build().RunAsync();
