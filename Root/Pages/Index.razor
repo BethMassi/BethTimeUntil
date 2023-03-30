@@ -1,0 +1,60 @@
+﻿@page "/"
+@using Root.Models
+@inject IFormFactor FormFactor
+@inject ILocalStorage LocalStorage
+
+
+<div class="text-center">
+    <h1>Countdown to @myModel.Name</h1>
+    <h4>@timeUntil</h4>
+         
+    <lottie-player src=@src background="transparent" speed="1"
+                    style="width: 300px; height: 300px; align-content: center; margin: 0 auto;" loop autoplay />
+    
+    <h6>@runningOn</h6>    
+</div>
+
+@code {
+
+    private string timeUntil;
+    private string runningOn;
+    private string src;
+    private static System.Timers.Timer aTimer;
+    private TimeUntilModel myModel;
+
+    protected override void OnInitialized()
+    {
+        myModel = TimeUntilService.GetModel(LocalStorage);
+        src = $"_content/Root/animations/{myModel.AnimationImage}.json";
+
+        StartTimer();        
+        runningOn = $"(Form factor is {FormFactor.GetFormFactor()})";
+    }
+
+    private void StartTimer()
+    {
+        aTimer = new System.Timers.Timer(1000);
+        aTimer.Elapsed += CountDownTimer;
+        aTimer.Enabled = true;        
+    }
+
+    private void CountDownTimer(Object source, System.Timers.ElapsedEventArgs e)
+    {
+        TimeSpan remainingTime = myModel.CountdownDate - DateTime.UtcNow;
+        if (remainingTime > TimeSpan.Zero)
+        {   
+            if (remainingTime.Days > 365) {
+                timeUntil = $"{remainingTime.Days / 365} Years, {remainingTime.Days % 365} Days, {remainingTime.Hours} Hours, {remainingTime.Minutes} Minutes, {remainingTime.Seconds} Seconds";
+            } else
+            {
+                timeUntil = $"{remainingTime.Days} Days, {remainingTime.Hours} Hours, {remainingTime.Minutes} Minutes, {remainingTime.Seconds} Seconds";
+            }
+        }
+        else
+        {
+            timeUntil = "It's here!";
+            aTimer.Enabled = false;
+        }
+        InvokeAsync(StateHasChanged);
+    }
+}
