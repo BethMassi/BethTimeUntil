@@ -23,10 +23,18 @@
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
         <ApplicationVersion>1</ApplicationVersion>
 
-        <_OSArchitecture>$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)</_OSArchitecture>
+       <!-- Workaround for running webview on iOS simulator on ARM64 devices -->
+       <!--<_iOSRuntimeIdentifier>iossimulator-arm64</_iOSRuntimeIdentifier>-->
+       <_OSArchitecture>$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)</_OSArchitecture>
         <_TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</_TargetPlatformIdentifier>
         <RuntimeIdentifier Condition="'$(_TargetPlatformIdentifier)' == 'ios' And '$(_OSArchitecture)' == 'Arm64' And ('$(_iOSRuntimeIdentifier)' == 'iossimulator-x64' Or ('$(_iOSRuntimeIdentifier)' == '' And '$(RuntimeIdentifier)' == ''))">iossimulator-arm64</RuntimeIdentifier>
-      
+      <!-- This also needs to be in the .scproj.user file: 
+        <PropertyGroup Condition="'$(TargetPlatformIdentifier)'=='iOS'">
+            <RuntimeIdentifier>iossimulator-arm64</RuntimeIdentifier>
+            <PlatformTarget>arm64</PlatformTarget>
+        </PropertyGroup>     
+      -->
+            
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">24.0</SupportedOSPlatformVersion>
