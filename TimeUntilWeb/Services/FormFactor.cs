@@ -8,5 +8,10 @@ namespace TimeUntilWeb.Services
         {
             return "Web";
         }
+
+        public string GetPlatform()
+        {
+            return Environment.OSVersion.ToString();
+        }
     }
 }

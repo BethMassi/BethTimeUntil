@@ -28,7 +28,7 @@
         src = $"_content/Root/animations/{myModel.AnimationImage}.json";
 
         StartTimer();        
-        runningOn = $"(Form factor is {FormFactor.GetFormFactor()})";
+        runningOn = $"(Form factor is {FormFactor.GetFormFactor()}, running on {FormFactor.GetPlatform()})";
     }
 
     private void StartTimer()

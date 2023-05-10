@@ -1,4 +1,5 @@
 ﻿using Root.Interfaces;
+using System;
 
 namespace TimeUntilWPF.Services
 {
@@ -6,7 +7,12 @@ namespace TimeUntilWPF.Services
     {
         public string GetFormFactor()
         {
-            return "Windows - WPF";
+            return "Desktop - WPF";
+        }
+
+        public string GetPlatform()
+        {
+            return Environment.OSVersion.ToString();
         }
     }
 }

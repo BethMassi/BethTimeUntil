@@ -6,7 +6,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Root", "Root\Root.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeUntilWeb", "TimeUntilWeb\TimeUntilWeb.csproj", "{7081D717-9E81-437D-87EB-D1EAE2322C3F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeUntilMAUI", "TimeUntil\TimeUntilMAUI.csproj", "{0030F7C7-12BF-4A97-9959-6E725298401E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeUntilMAUI", "TimeUntilMAUI\TimeUntilMAUI.csproj", "{0030F7C7-12BF-4A97-9959-6E725298401E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeUntilWPF", "TimeUntilWPF\TimeUntilWPF.csproj", "{189839A2-1685-428F-B4D9-7BE83C143004}"
 EndProject

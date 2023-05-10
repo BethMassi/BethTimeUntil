@@ -13,5 +13,10 @@ namespace TimeUntilMAUI.Services
         {
             return DeviceInfo.Idiom.ToString();
         }
+
+        public string GetPlatform()
+        {
+            return DeviceInfo.Platform.ToString();
+        }
     }
 }

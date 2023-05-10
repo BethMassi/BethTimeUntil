@@ -9,7 +9,11 @@ namespace Root.Interfaces
     public interface IFormFactor
     {
         public string GetFormFactor();
+        public string GetPlatform();
+        
     }
+
+    
 }
 
 
