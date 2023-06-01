@@ -59,7 +59,11 @@
     private void OnLocationChanged(object sender, LocationChangedEventArgs e)
     {
         isNavigating = true;
-        HandleSubmit();        
+        //Only save if we're navigating away from the page, not into it
+        if (sender is NavigationManager navigationManager && !navigationManager.Uri.ToLower().Contains("configure"))
+        {
+            HandleSubmit();
+        }        
     }
 
     private void HandleSubmit()
