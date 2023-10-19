@@ -4,21 +4,23 @@ namespace TimeUntilWeb.Services
 {
     public class LocalStorage : Root.Services.LocalStorage
     {
-        private ISyncLocalStorageService LocalStorageService;
+        private ILocalStorageService LocalStorageService;
 
-        public LocalStorage(ISyncLocalStorageService _localStorageService)
+        public LocalStorage(ILocalStorageService _localStorageService)
         {
             LocalStorageService = _localStorageService;
         }
 
         protected override string ReadFromStorage()
-        {            
-             return LocalStorageService.GetItem<string>(StorageKeyName);
+        {
+            ValueTask<string> task = LocalStorageService.GetItemAsync<string>(StorageKeyName);
+            return task.GetAwaiter().GetResult();
+
         }
 
         protected override void SaveToStorage(string jsonString)
         {                
-            LocalStorageService.SetItem(StorageKeyName, jsonString);            
+            LocalStorageService.SetItemAsync(StorageKeyName, jsonString);            
         }
     }
 }
