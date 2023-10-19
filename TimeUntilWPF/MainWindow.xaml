@@ -11,7 +11,7 @@
     <Grid>
         <blazor:BlazorWebView HostPage="wwwroot\index.html" Services="{DynamicResource services}">
             <blazor:BlazorWebView.RootComponents>
-                <blazor:RootComponent Selector="#app" ComponentType="{x:Type root:Main}" />
+                <blazor:RootComponent Selector="#app" ComponentType="{x:Type root:Routes}" />
             </blazor:BlazorWebView.RootComponents>
         </blazor:BlazorWebView>
     </Grid>
