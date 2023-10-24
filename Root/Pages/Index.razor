@@ -11,7 +11,7 @@
     <lottie-player src=@src background="transparent" speed="1"
                     style="width: 300px; height: 300px; align-content: center; margin: 0 auto;" loop autoplay />
     
-    <h6>@runningOn</h6>    
+    <h6 @onclick="@GetRunningOn">@runningOn</h6>    
 </div>
 
 @code {
@@ -27,7 +27,12 @@
         myModel = TimeUntilService.GetModel(LocalStorage);
         src = $"_content/Root/animations/{myModel.AnimationImage}.json";
 
-        StartTimer();        
+        StartTimer();
+        GetRunningOn();
+    }
+
+    private void GetRunningOn()
+    {        
         runningOn = $"(Form factor is {FormFactor.GetFormFactor()}, running on {FormFactor.GetPlatform()})";
     }
 
