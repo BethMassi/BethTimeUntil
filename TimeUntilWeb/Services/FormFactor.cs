@@ -6,7 +6,7 @@ namespace TimeUntilWeb.Services
     {
         public string GetFormFactor()
         {
-            return "Web";
+            return "Web Server";
         }
 
         public string GetPlatform()
