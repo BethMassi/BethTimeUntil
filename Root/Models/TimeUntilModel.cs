@@ -14,7 +14,8 @@ namespace Root.Models
         public string Name { get; set; } = "My Countdown";
         [Required]        
         public DateTime CountdownDate { get; set; } = DateTime.Today.AddDays(7);
-        public string AnimationImage { get; set; } = "lottie_hourglass";        
+        public string AnimationImage { get; set; } = "lottie_hourglass";
+        public string SelfieImage { get; set; } = "_content/Root/selfie-placeholder-image.jpg";
     }
 
     internal class TimeUntilImages

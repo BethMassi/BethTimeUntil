@@ -6,8 +6,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Root", "Root\Root.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeUntilMAUI", "TimeUntilMAUI\TimeUntilMAUI.csproj", "{0030F7C7-12BF-4A97-9959-6E725298401E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeUntilWPF", "TimeUntilWPF\TimeUntilWPF.csproj", "{189839A2-1685-428F-B4D9-7BE83C143004}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeUntilWeb.Client", "TimeUntilWeb.Client\TimeUntilWeb.Client.csproj", "{5AAB3861-6EA9-4B72-A84F-15DFD1F04AC4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeUntilWeb", "TimeUntilWeb\TimeUntilWeb.csproj", "{A48707F1-3C70-474F-9C59-46D583A9F86C}"
@@ -28,10 +26,6 @@ Global
 		{0030F7C7-12BF-4A97-9959-6E725298401E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0030F7C7-12BF-4A97-9959-6E725298401E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0030F7C7-12BF-4A97-9959-6E725298401E}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{189839A2-1685-428F-B4D9-7BE83C143004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{189839A2-1685-428F-B4D9-7BE83C143004}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{189839A2-1685-428F-B4D9-7BE83C143004}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{189839A2-1685-428F-B4D9-7BE83C143004}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5AAB3861-6EA9-4B72-A84F-15DFD1F04AC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5AAB3861-6EA9-4B72-A84F-15DFD1F04AC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AAB3861-6EA9-4B72-A84F-15DFD1F04AC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,7 +39,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		        SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}
 		SolutionGuid = {316E04C3-8F95-4573-B6C5-E6A6985B81E2}
+		        SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}
 	EndGlobalSection
 EndGlobal

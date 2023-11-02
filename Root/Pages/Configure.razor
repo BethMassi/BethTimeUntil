@@ -3,11 +3,12 @@
 @using Root.Services
 @inject ILocalStorage LocalStorage
 @inject NavigationManager NavigationManager
+@inject IPhotoTaker PhotoTaker
 
 <div>
     <h2>Set up your countdown!</h2>
 
-    <EditForm class="form-control" Model="@myModel" OnValidSubmit="@HandleSubmit">
+    <EditForm class="form-control" Model="@myModel" OnValidSubmit="@Submit">
         <DataAnnotationsValidator />
         <ValidationSummary />
 
@@ -38,7 +39,20 @@
                     </InputRadioGroup>                   
                 </td>
             </tr>                  
-        </table>
+            <tr>
+                <td colspan="2" >                   
+                @{
+                #if ANDROID
+                }
+                <img src="@myModel.SelfieImage" width="250" height="300" />
+                <br />
+                <button class="btn btn-secondary" @onclick="@TakePhoto">Take a selfie!</button>
+                @{
+                #endif
+                }
+                </td>
+            </tr>
+        </table>    
     </EditForm>
 </div>
 
@@ -47,27 +61,46 @@
     private TimeUntilImages images;
     private bool isSubmitted = false;
     private bool isNavigating = false;
+    private bool isTakingPhoto = false;   
 
     protected override void OnInitialized()
     {
         myModel = TimeUntilService.GetModel(LocalStorage);
         images = TimeUntilService.GetImages();
 
-        NavigationManager.LocationChanged += OnLocationChanged;
+       NavigationManager.LocationChanged += OnLocationChanged;
+        
+        PhotoTaker.PropertyChanged += (sender, e) =>
+        {           
+            if (e.PropertyName == nameof(PhotoTaker.SourceImage))
+            {
+                myModel.SelfieImage = PhotoTaker.SourceImage;
+                StateHasChanged(); 
+                isTakingPhoto = false;   
+            }           
+        };
+    }
+
+    private void TakePhoto()
+    {
+        isTakingPhoto = true;   
+        PhotoTaker.TakePhoto();
     }
 
     private void OnLocationChanged(object sender, LocationChangedEventArgs e)
     {
+        if (isTakingPhoto) return;
         isNavigating = true;
         //Only save if we're navigating away from the page, not into it
         if (sender is NavigationManager navigationManager && !navigationManager.Uri.ToLower().Contains("configure"))
         {
-            HandleSubmit();
+            Submit();
         }        
     }
 
-    private void HandleSubmit()
+    private void Submit() 
     {
+        if (isTakingPhoto) return;
         if (!isSubmitted)
         {
             TimeUntilService.SaveModel(myModel, LocalStorage);             
@@ -78,4 +111,5 @@
             NavigationManager.NavigateTo("/");
         }
     }
+
 }
