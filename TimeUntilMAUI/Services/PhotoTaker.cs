@@ -19,18 +19,13 @@ namespace TimeUntilMAUI.Services
         {
             if (MediaPicker.Default.IsCaptureSupported)
             {
+                //MAUI abstracts the device specific code for us
                 FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
 
                 if (photo != null)
                 {
-                    // save the file into local storage
-                    //string localFilePath = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
-
+                    //razor component needs a base64 encoded string so it can display the image in <img /> tag
                     using Stream sourceStream = await photo.OpenReadAsync();
-                    //using FileStream localFileStream = File.OpenWrite(localFilePath);
-
-                    //await sourceStream.CopyToAsync(localFileStream);
-                    //sourceStream.Position = 0;
 
                     byte[] imageBytes = new byte[sourceStream.Length];
                     sourceStream.Read(imageBytes, 0, (int)sourceStream.Length);
