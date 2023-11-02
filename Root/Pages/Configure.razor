@@ -39,19 +39,25 @@
                     </InputRadioGroup>                   
                 </td>
             </tr>                  
+            @{
+            #if ANDROID || IOS
+            }
             <tr>
                 <td colspan="2" >                   
-                @{
-                #if ANDROID
-                }
-                <img src="@myModel.SelfieImage" width="250" height="300" />
-                <br />
-                <button class="btn btn-secondary" @onclick="@TakePhoto">Take a selfie!</button>
-                @{
-                #endif
-                }
+                    <img src="@myModel.SelfieImage" width="250" height="300" />
                 </td>
             </tr>
+            <tr>
+                <td width="60%">
+                    <button class="btn btn-secondary" @onclick="@TakePhoto">Take a selfie!</button>
+                </td>
+                <td>
+                    <button class="btn btn-secondary" @onclick="@ClearPhoto">Clear</button>
+                </td>
+            </tr>
+                @{
+                #endif
+                }               
         </table>    
     </EditForm>
 </div>
@@ -85,6 +91,11 @@
     {
         isTakingPhoto = true;   
         PhotoTaker.TakePhoto();
+    }
+
+    private void ClearPhoto()
+    {        
+        PhotoTaker.SourceImage = "_content/Root/selfie-placeholder-image.jpg";
     }
 
     private void OnLocationChanged(object sender, LocationChangedEventArgs e)
