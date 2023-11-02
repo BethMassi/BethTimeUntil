@@ -38,27 +38,29 @@
                     }
                     </InputRadioGroup>                   
                 </td>
-            </tr>                  
-            @{
-            #if ANDROID || IOS
-            }
+            </tr>
+        </table>    
+@{
+#if ANDROID || IOS
+}
+        <table>
             <tr>
                 <td colspan="2" >                   
                     <img src="@myModel.SelfieImage" width="250" height="300" />
                 </td>
             </tr>
             <tr>
-                <td width="60%">
+                <td width="50%">
                     <button class="btn btn-secondary" @onclick="@TakePhoto">Take a selfie!</button>
                 </td>
                 <td>
                     <button class="btn btn-secondary" @onclick="@ClearPhoto">Clear</button>
                 </td>
             </tr>
-                @{
-                #endif
-                }               
-        </table>    
+        </table>
+@{
+#endif
+}       
     </EditForm>
 </div>
 
