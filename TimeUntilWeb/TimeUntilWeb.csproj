@@ -9,7 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TimeUntilWeb.Client\TimeUntilWeb.Client.csproj" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-rc.2.23480.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-*" />
   </ItemGroup>
 
 </Project>
