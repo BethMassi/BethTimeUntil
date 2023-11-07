@@ -15,7 +15,7 @@
     {
         <img src="@src" width="250" height="300" />
     }
-    <h6 @onclick="@GetRunningOn">@runningOn</h6>    
+    <h5>@runningOn</h5>    
 </div>
 
 @code {
@@ -28,18 +28,16 @@
 
     protected override void OnInitialized()
     {
+
+        runningOn = $"(Form factor is {FormFactor.GetFormFactor()}, running on {FormFactor.GetPlatform()})";
+
         myModel = TimeUntilService.GetModel(LocalStorage);
         if (!myModel.SelfieImage.Contains("placeholder")) {
             src = myModel.SelfieImage;
         } else src = $"_content/Root/animations/{myModel.AnimationImage}.json";
 
         StartTimer();
-        GetRunningOn();
-    }
-
-    private void GetRunningOn()
-    {        
-        runningOn = $"(Form factor is {FormFactor.GetFormFactor()}, running on {FormFactor.GetPlatform()})";
+        
     }
 
     private void StartTimer()
