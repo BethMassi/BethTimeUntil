@@ -7,11 +7,15 @@
 <div class="text-center">
     <h1>Countdown to @myModel.Name</h1>
     <h4>@timeUntil</h4>
-         
+
+@if (src.Contains(".json")) {
     <lottie-player src=@src background="transparent" speed="1"
-                    style="width: 300px; height: 300px; align-content: center; margin: 0 auto;" loop autoplay />
-    
-    <h6>@runningOn</h6>    
+        style="width: 300px; height: 300px; align-content: center; margin: 0 auto;" loop autoplay />
+    } else
+    {
+        <img src="@src" width="250" />
+    }
+    <h5>@runningOn</h5>    
 </div>
 
 @code {
@@ -24,11 +28,16 @@
 
     protected override void OnInitialized()
     {
-        myModel = TimeUntilService.GetModel(LocalStorage);
-        src = $"_content/Root/animations/{myModel.AnimationImage}.json";
 
-        StartTimer();        
         runningOn = $"(Form factor is {FormFactor.GetFormFactor()}, running on {FormFactor.GetPlatform()})";
+
+        myModel = TimeUntilService.GetModel(LocalStorage);
+        if (!myModel.SelfieImage.Contains("placeholder")) {
+            src = myModel.SelfieImage;
+        } else src = $"_content/Root/animations/{myModel.AnimationImage}.json";
+
+        StartTimer();
+        
     }
 
     private void StartTimer()
