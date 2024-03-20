@@ -1,38 +1,28 @@
 ﻿using System.ComponentModel;
 using Root.Interfaces;
 
-namespace TimeUntilMAUI.Services
+namespace Root.Services
 {
-    public class PhotoTaker : IPhotoTaker, INotifyPropertyChanged
-
+    public abstract class PhotoManager : IPhotoManager, INotifyPropertyChanged
     {
         private string photoPath; 
         private string sourceImage;
-
-        public async void TakePhoto()
+        public abstract void PickPhoto();
+        public abstract void TakePhoto();
+        protected void SetSourceImage(Stream photoStream)
         {
-            if (MediaPicker.Default.IsCaptureSupported)
+            if (photoStream != null)
             {
-                //MAUI abstracts the device specific code for us
-                FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
+                //razor component needs a base64 encoded string so it can display the image in <img /> tag
+                byte[] imageBytes = new byte[photoStream.Length];
+                photoStream.Read(imageBytes, 0, (int)photoStream.Length);
 
-                if (photo != null)
-                {
-                    //razor component needs a base64 encoded string so it can display the image in <img /> tag
-                    using Stream sourceStream = await photo.OpenReadAsync();
-
-                    byte[] imageBytes = new byte[sourceStream.Length];
-                    sourceStream.Read(imageBytes, 0, (int)sourceStream.Length);
-
-                    var imageSource = Convert.ToBase64String(imageBytes);
-                    imageSource = string.Format("data:image/jpg;base64,{0}", imageSource);
-
-                    PhotoPath = photo.FullPath;
-                    SourceImage = imageSource;
-                }
+                var imageSource = Convert.ToBase64String(imageBytes);
+                imageSource = string.Format("data:image/jpg;base64,{0}", imageSource);
+                                
+                SourceImage = imageSource;
             }
         }
-
         protected void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             PropertyChangedEventHandler handler = PropertyChanged;

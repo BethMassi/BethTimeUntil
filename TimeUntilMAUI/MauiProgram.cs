@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿
+using Microsoft.Extensions.Logging;
 using Root.Interfaces;
 using TimeUntilMAUI.Services;
 
@@ -11,6 +12,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+            
             .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -25,7 +27,7 @@ public static class MauiProgram
 		// Add device specific services used by RCL (Root)
 		builder.Services.AddSingleton<IFormFactor, FormFactor>();
         builder.Services.AddSingleton<ILocalStorage, LocalStorage>();
-        builder.Services.AddSingleton<IPhotoTaker, PhotoTaker>();
+        builder.Services.AddSingleton<IPhotoManager, PhotoManager>();        
 
         return builder.Build();
 	}

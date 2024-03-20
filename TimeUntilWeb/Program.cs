@@ -16,7 +16,7 @@ builder.Services.AddBlazoredLocalStorage();
 // Add device specific services used by RCL (Root)
 builder.Services.AddScoped<IFormFactor, FormFactor>();
 builder.Services.AddScoped<ILocalStorage, LocalStorage>();
-builder.Services.AddScoped<IPhotoTaker, PhotoTaker>();
+builder.Services.AddScoped<IPhotoManager, PhotoManager>();
 
 var app = builder.Build();
 

@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Root.Interfaces
 {
-    public interface IPhotoTaker : INotifyPropertyChanged
+    public interface IPhotoManager : INotifyPropertyChanged
     {
-        public void TakePhoto(); 
+        public void TakePhoto();
+        public void PickPhoto();
         public string PhotoPath { get; set; }
         public string SourceImage { get; set; }        
     }

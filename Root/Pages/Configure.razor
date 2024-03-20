@@ -3,7 +3,7 @@
 @using Root.Services
 @inject ILocalStorage LocalStorage
 @inject NavigationManager NavigationManager
-@inject IPhotoTaker PhotoTaker
+@inject IPhotoManager PhotoManager
 
 <div>
     <h2>Set up your countdown!</h2>
@@ -40,27 +40,20 @@
                 </td>
             </tr>
         </table>    
-@{
-#if ANDROID || IOS
-}
+@{#if ANDROID || IOS || WINDOWS }
         <table>
             <tr>
-                <td colspan="2" >                   
+                <td colspan="3" >                   
                     <img src="@myModel.SelfieImage" width="250" />
                 </td>
             </tr>
             <tr>
-                <td width="50%">
-                    <button class="btn btn-secondary" @onclick="@TakePhoto">Take a selfie!</button>
-                </td>
-                <td>
-                    <button class="btn btn-secondary" @onclick="@ClearPhoto">Clear</button>
-                </td>
+                <td><button class="btn btn-secondary" @onclick="@TakePhoto">Photo</button></td>
+                <td><button class="btn btn-secondary" @onclick="@PickPhoto">Pic</button></td>
+                <td><button class="btn btn-secondary" @onclick="@ClearPhoto">Clear</button></td>
             </tr>
-        </table>
-@{
-#endif
-}       
+        </table>  
+@{#endif}
     </EditForm>
 </div>
 
@@ -76,13 +69,13 @@
         myModel = TimeUntilService.GetModel(LocalStorage);
         images = TimeUntilService.GetImages();
 
-       NavigationManager.LocationChanged += OnLocationChanged;
+        NavigationManager.LocationChanged += OnLocationChanged;
         
-        PhotoTaker.PropertyChanged += (sender, e) =>
+        PhotoManager.PropertyChanged += (sender, e) =>
         {           
-            if (e.PropertyName == nameof(PhotoTaker.SourceImage))
+            if (e.PropertyName == nameof(PhotoManager.SourceImage))
             {
-                myModel.SelfieImage = PhotoTaker.SourceImage;
+                myModel.SelfieImage = PhotoManager.SourceImage;
                 StateHasChanged(); 
                 isTakingPhoto = false;   
             }           
@@ -92,12 +85,18 @@
     private void TakePhoto()
     {
         isTakingPhoto = true;   
-        PhotoTaker.TakePhoto();
+        PhotoManager.TakePhoto();
+    }
+
+    private void PickPhoto()
+    {
+        isTakingPhoto = true;   
+        PhotoManager.PickPhoto();
     }
 
     private void ClearPhoto()
     {        
-        PhotoTaker.SourceImage = "_content/Root/selfie-placeholder-image.jpg";
+        PhotoManager.SourceImage = "_content/Root/selfie-placeholder-image.jpg";
     }
 
     private void OnLocationChanged(object sender, LocationChangedEventArgs e)

@@ -12,6 +12,6 @@ builder.Services.AddBlazoredLocalStorageAsSingleton();
 // Add device specific services used by RCL (Root)
 builder.Services.AddSingleton<IFormFactor, FormFactor>();
 builder.Services.AddSingleton<ILocalStorage, LocalStorage>();
-builder.Services.AddSingleton<IPhotoTaker, PhotoTaker>();
+builder.Services.AddSingleton<IPhotoManager, PhotoManager>();
 
 await builder.Build().RunAsync();

@@ -9,7 +9,7 @@
         <UseMaui>true</UseMaui>
         <SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences> 
 
-      <SingleProject>true</SingleProject>
+        <SingleProject>true</SingleProject>
         <ImplicitUsings>enable</ImplicitUsings>
         <EnableDefaultCssItems>false</EnableDefaultCssItems>
       
@@ -31,14 +31,19 @@
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
         <WindowsPackageType>None</WindowsPackageType>
+	  <!--<PublishSingleFile>true</PublishSingleFile>-->
+    </PropertyGroup>
+    <!-- Workardound for Windows unpackaged builds that include referenced class libs -->
+    <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(RuntimeIdentifierOverride)' != ''">
+        <RuntimeIdentifier>$(RuntimeIdentifierOverride)</RuntimeIdentifier>
     </PropertyGroup>
 
     <ItemGroup>
         <!-- App Icon -->
-        <MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#FFFFFF" BaseSize="48,48"/>
+        <MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#FFFFFF" BaseSize="48,48" />
 
         <!-- Splash Screen -->
-        <MauiSplashScreen Include="Resources\Splash\splash.svg" BaseSize="256,256" Color="#FFFFFF"/>
+        <MauiSplashScreen Include="Resources\Splash\splash.svg" BaseSize="256,256" Color="#FFFFFF" />
 
         <!-- Images -->
         <MauiImage Include="Resources\Images\*" />

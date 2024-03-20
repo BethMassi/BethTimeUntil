@@ -30,6 +30,7 @@ namespace TimeUntilWPF
             serviceCollection.AddWpfBlazorWebView();
             serviceCollection.AddSingleton<ILocalStorage, LocalStorage>();
             serviceCollection.AddSingleton<IFormFactor, FormFactor>();
+            serviceCollection.AddSingleton<IPhotoManager, PhotoManager>();
 
             Resources.Add("services", serviceCollection.BuildServiceProvider());
 
