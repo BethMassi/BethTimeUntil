@@ -48,7 +48,11 @@
                 </td>
             </tr>
             <tr>
-                <td><button class="btn btn-secondary" @onclick="@TakePhoto">Photo</button></td>
+                <td>
+                    @{#if ANDROID || IOS }
+                    <button class="btn btn-secondary" @onclick="@TakePhoto">Photo</button>
+                    @{#endif}
+                </td>
                 <td><button class="btn btn-secondary" @onclick="@PickPhoto">Pic</button></td>
                 <td><button class="btn btn-secondary" @onclick="@ClearPhoto">Clear</button></td>
             </tr>
