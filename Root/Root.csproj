@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <!--We have UI for ios and android so we will spcfically target those platforms-->
+    <!--We have UI for ios, android and windows so we will specifically target those platforms-->
     <TargetFrameworks>net8.0;net8.0-android;net8.0-ios</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
 
