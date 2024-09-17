@@ -60,15 +60,12 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.0-*" />
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.0-*" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="9.0.0-*" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0-*" />
     </ItemGroup>
    
     <ItemGroup>
       <ProjectReference Include="..\Root\Root.csproj" />
-    </ItemGroup>
-   
-    <ItemGroup>
-      <PackageReference Update="Microsoft.AspNetCore.Components.WebView.Maui" Version="8.0.70" />
-    </ItemGroup>
-   
+    </ItemGroup>  
+       
 </Project>
