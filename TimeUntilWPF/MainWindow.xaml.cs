@@ -34,6 +34,9 @@ namespace TimeUntilWPF
 
             Resources.Add("services", serviceCollection.BuildServiceProvider());
 
+            Height = 700;
+            Width = 900;
+
         }
     }
 }
