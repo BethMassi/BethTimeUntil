@@ -7,7 +7,7 @@ public partial class App : Application
 		InitializeComponent();
     }
 
-    protected override Window CreateWindow(IActivationState activationState)
+    protected override Window CreateWindow(IActivationState? activationState)
     {
         var window = new Window(new MainPage());
 

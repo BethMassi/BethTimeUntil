@@ -13,8 +13,8 @@ namespace TimeUntilWeb.Services
 
         protected override string ReadFromStorage()
         {
-            ValueTask<string> task = LocalStorageService.GetItemAsync<string>(StorageKeyName);
-            return task.GetAwaiter().GetResult();
+            ValueTask<string?> task = LocalStorageService.GetItemAsync<string>(StorageKeyName);
+            return task.GetAwaiter().GetResult() ?? string.Empty;
 
         }
 

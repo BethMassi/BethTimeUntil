@@ -11,7 +11,7 @@ namespace TimeUntilWeb.Client.Services
             LocalStorageService = _localStorageService;
         }
 
-        protected override string ReadFromStorage()
+        protected override string? ReadFromStorage()
         {            
              return LocalStorageService.GetItem<string>(StorageKeyName);
         }

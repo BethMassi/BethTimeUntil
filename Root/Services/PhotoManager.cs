@@ -14,13 +14,16 @@ namespace Root.Services
             if (photoStream != null)
             {
                 //razor component needs a base64 encoded string so it can display the image in <img /> tag
-                byte[] imageBytes = new byte[photoStream.Length];
-                photoStream.Read(imageBytes, 0, (int)photoStream.Length);
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    photoStream.CopyTo(memoryStream);
+                    byte[] imageBytes = memoryStream.ToArray();
 
-                var imageSource = Convert.ToBase64String(imageBytes);
-                imageSource = string.Format("data:image/jpg;base64,{0}", imageSource);
-                                
-                SourceImage = imageSource;
+                    var imageSource = Convert.ToBase64String(imageBytes);
+                    imageSource = string.Format("data:image/jpg;base64,{0}", imageSource);
+
+                    SourceImage = imageSource;
+                }
             }
         }
         protected void OnPropertyChanged(PropertyChangedEventArgs e)
