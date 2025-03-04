@@ -10,7 +10,7 @@ namespace TimeUntilMAUI.Services
         public override async void PickPhoto() 
         {
             //MAUI abstracts the device specific code for us
-            FileResult photo = await MediaPicker.Default.PickPhotoAsync();
+            FileResult? photo = await MediaPicker.Default.PickPhotoAsync();
             SetPhoto(photo);
         }
         public override async void TakePhoto()
@@ -20,7 +20,7 @@ namespace TimeUntilMAUI.Services
                 try
                 {
                     //MAUI abstracts the device specific code for us
-                    FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
+                    FileResult? photo = await MediaPicker.Default.CapturePhotoAsync();
                     SetPhoto(photo);
                 }
                 catch (FileNotFoundException ex)
@@ -30,7 +30,7 @@ namespace TimeUntilMAUI.Services
                 }                
             }
         }
-        private async void SetPhoto(FileResult photo)
+        private async void SetPhoto(FileResult? photo)
         {
             if (photo != null)
             {                
